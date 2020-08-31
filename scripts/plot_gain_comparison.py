@@ -2,7 +2,32 @@ import astropy.io.fits as pf
 import numpy as np
 import h5py
 import matplotlib.pyplot as plt
+from matplotlib import rcParams, rc
 
+params = {'savefig.dpi'        : 300, # save figures to 300 dpi
+          'xtick.top'          : False,
+          'ytick.right'        : True, #Set to false
+          'axes.spines.top'    : True, #Set to false
+          'axes.spines.bottom' : True,
+          'axes.spines.left'   : True,
+          'axes.spines.right'  : True, #Set to false@
+          'axes.grid.axis'     : 'y',
+          'axes.grid'          : False,
+          'ytick.major.size'   : 10,
+          'ytick.minor.size'   : 5,
+          'xtick.major.size'   : 10,
+          'xtick.minor.size'   : 5,
+          'ytick.major.width'   : 1.5,
+          'ytick.minor.width'   : 1.5,
+          'xtick.major.width'   : 1.5,
+          'xtick.minor.width'   : 1.5,
+          'axes.linewidth'      : 1.5,
+          #'ytick.major.size'   : 6,
+          #'ytick.minor.size'   : 3,
+          #'xtick.major.size'   : 6,
+          #'xtick.minor.size'   : 3,
+}
+rcParams.update(params)
 
 def load_dpc_gains(channel, data_dir='/mn/stornext/u3/eirikgje/data/cassiopeia/dpc_gains/'):
     if channel == '030':
@@ -52,8 +77,9 @@ def load_npipe_gains(channel, initfile='/mn/stornext/u3/eirikgje/data/cassiopeia
     return data
 
 
-def load_bp_gains(channel, sample, target_file='/mn/stornext/u3/eirikgje/data/cassiopeia/chains_debug/chain_c0001.h5'):
+#def load_bp_gains(channel, sample, target_file='/mn/stornext/u3/eirikgje/data/cassiopeia/chains_debug/chain_c0001.h5'):
 #def load_bp_gains(channel, sample, target_file='/mn/stornext/u3/eirikgje/data/cassiopeia/chains_debug_saved/chain_c0001.h5'):
+def load_bp_gains(channel, sample, target_file='/mn/stornext/u3/hke/xsan/commander3/v2/chains_BP7_c12/chain_c0001.h5'):
     if channel == '030':
         dets = ['27M', '27S', '28M', '28S']
     elif channel == '044':
@@ -111,14 +137,17 @@ ranges = {
 dets = {
     '030': ['27M', '27S', '28M', '28S'],
     '044': ['24M', '24S', '25M', '25S', '26M', '26S'],
-#    '070': ['18M', '18S', '19M', '19S', '20M', '20S', '21M', '21S', '22M', '22S', '23M', '23S']
+    '070': ['18M', '18S', '19M', '19S', '20M', '20S', '21M', '21S', '22M', '22S', '23M', '23S']
 
-    '070ds1': ['18M', '18S', '23M', '23S'],
-    '070ds2': ['19M', '19S', '22M', '22S'],
-    '070ds3': ['20M', '20S', '21M', '21S']
+#    '070ds1': ['18M', '18S', '23M', '23S'],
+#    '070ds2': ['19M', '19S', '22M', '22S'],
+#    '070ds3': ['20M', '20S', '21M', '21S']
 }
 
-sample = 4
+
+
+
+sample = 200
 for channel in ['030', '044', '070ds1', '070ds2', '070ds3']:
 #for channel in ['030', '044', '070']:
     npipe_channel = channel

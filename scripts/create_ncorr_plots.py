@@ -4,13 +4,13 @@ from matplotlib.colors import ListedColormap
 import matplotlib.pyplot as plt
 
 my_cmap = ListedColormap(np.loadtxt('/home/eirik/data/Planck_Parchment_RGB.txt')/255.)
-directory = '/home/eirik/data/cassiopeia/run12/'
+directory = '/home/eirik/data/cassiopeia/run38/'
 
-mapfile = directory + 'tod_044_ncorr_c0001_k000015.fits' 
-descriptive_text = 'full'
+mapfile = directory + 'tod_044_ncorr_c0001_k000110.fits' 
+descriptive_text = 'full_min26dets'
 #descriptive_text = 'survey8'
 #descriptive_text = 'full'
-limits = 5
+limits = 2
 
 a = healpy.read_map(mapfile, field=None)
 a_smoothed = healpy.smoothing(a, fwhm=3 * np.pi/180)

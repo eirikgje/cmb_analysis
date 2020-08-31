@@ -39,7 +39,8 @@ def run_commander(data_dir, run_name, base_param_file, num_processes,
                   change_seed=True,
                   delete_existing_dir=False,
                   commander1=True,
-                  machinefile=''):
+                  machinefile='',
+                  build=None):
     data_dir = base_data_dir + data_dir + '/'
     chain_dir = data_dir + 'chains_' + run_name + '/'
     if delete_existing_dir and os.path.isdir(chain_dir):
@@ -49,7 +50,7 @@ def run_commander(data_dir, run_name, base_param_file, num_processes,
         exec_path = '/mn/stornext/u3/eirikgje/src/Commander/commander1/src/commander/commander'
         params = {'CHAIN_DIRECTORY': '\'' + chain_dir + '\''}
     else:
-        exec_path = '/mn/stornext/u3/eirikgje/src/Commander/src/commander/commander'
+        exec_path = '/mn/stornext/u3/eirikgje/src/Commander/' + build + '/bin/commander3'
         params = {'OUTPUT_DIRECTORY':'\'' + chain_dir + '\''}
 
     param_file_name = 'param_commander_' + run_name + '.txt'
@@ -99,6 +100,12 @@ def run_commander(data_dir, run_name, base_param_file, num_processes,
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(
         description="Run Commander more easily.")
+    parser.add_argument(
+        'build',
+        type=str,
+        help='The name of the build (using Maksym\'s cmake structure). If --commander1 is set then this is ignored.',
+        default=None
+    )
     parser.add_argument(
         'data_dir',
         type=str,
@@ -151,7 +158,7 @@ if __name__ == '__main__':
     commander1 = True if args.commander1 else False
     machinefile = args.machinefile
     run_commander(args.data_dir, args.run_name, args.base_param_file,
-                  args.num_processes, param_dict=args.param_dict,
+                  args.num_processes, build=args.build, param_dict=args.param_dict,
                   change_seed=change_seed,
                   delete_existing_dir=delete_existing_dir,
                   commander1=commander1, machinefile=machinefile)

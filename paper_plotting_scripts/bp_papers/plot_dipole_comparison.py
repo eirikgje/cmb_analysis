@@ -37,7 +37,7 @@ plt.plot(data[:, 9])
 plt.plot(data[:, 8])
 plt.xlim(0, 10000)
 
-plt.xlabel('Sample number')
-plt.ylabel('Temperature (K)')
+plt.xlabel('PID')
+plt.ylabel('Temperature [K]')
 
-plt.savefig('dipole_comparison.png', bbox_inches='tight')
+plt.savefig('dipole_comparison.pdf', bbox_inches='tight')
